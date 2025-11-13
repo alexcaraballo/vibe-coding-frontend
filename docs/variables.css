@@ -1,0 +1,22 @@
+:root {
+    --primary-color: #001547;
+    --secondary-color: #00ef9c;
+    --tertiary-color: #0035b5;
+    --muted-color: #99a4b5;
+    --warning-color: #e6a23c;
+    --error-color: #f56c6c;
+    --table-warning-color: #f4c1c1;
+    --success-color: #00ef9c;
+    --body-background-color: #fff;
+    --background-color: #f7f7f7;
+
+    /* text */
+    --primary-text: #3e3f42;
+    --primary-text-alpha-5: rgb(62, 63, 66, 0.5);
+    --secondary-text: #828589;
+    --tertiary-text: #fff;
+
+    /* grays */
+    --light-gray: #e6e6e6;
+    --white-color: #ffffff;
+}
