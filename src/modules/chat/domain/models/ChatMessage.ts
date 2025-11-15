@@ -8,14 +8,13 @@ export interface ChatMessage {
   readAt: Date | null
 }
 
+export interface CreateChatMessageData {
+  message: string
+}
+
 export interface ChatConversation {
   bookingId: number
   messages: ChatMessage[]
   totalMessages: number
   unreadCount: number
-}
-
-export interface SendMessageData {
-  bookingId: number
-  message: string
 }

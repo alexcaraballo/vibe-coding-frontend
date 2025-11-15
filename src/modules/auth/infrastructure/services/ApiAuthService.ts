@@ -75,12 +75,12 @@ export class ApiAuthService implements IAuthRepository {
       license_number: data.licenseNumber
     }
 
-    const response = await apiClient.put<UserDTO>(`${this.authPath}/me`, requestData)
+    const response = await apiClient.put<UserDTO>('/users/me', requestData)
     return UserMapper.toDomain(response.data)
   }
 
   async getUserById(id: number): Promise<User> {
-    const response = await apiClient.get<UserDTO>(`${this.authPath}/${id}`)
+    const response = await apiClient.get<UserDTO>(`/users/${id}`)
     return UserMapper.toDomain(response.data)
   }
 

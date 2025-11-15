@@ -22,6 +22,27 @@ export interface User {
 export type UserRole = 'driver' | 'passenger' | 'both'
 
 /**
+ * Datos para actualizar el perfil de usuario
+ */
+export interface UpdateUserData {
+  name?: string
+  phone?: string
+  vehicleModel?: string
+  vehiclePlate?: string
+  licenseNumber?: string
+}
+
+/**
+ * Perfil público de usuario (datos expuestos públicamente)
+ */
+export interface PublicUserProfile {
+  id: number
+  name: string
+  role: UserRole
+  createdAt: Date
+}
+
+/**
  * Validaciones y reglas de negocio del dominio
  */
 export class UserValidator {

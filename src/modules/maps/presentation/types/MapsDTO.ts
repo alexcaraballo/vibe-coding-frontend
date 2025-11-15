@@ -45,3 +45,29 @@ export interface RouteWithStopsResponseDTO {
   total_distance_km: number | null
   waypoints: WaypointDTO[]
 }
+
+export interface PublicBookingDTO {
+  booking_id: number
+  seats_booked: number
+  pickup_location?: string | null
+  dropoff_location?: string | null
+  pickup_lat?: number | null
+  pickup_lng?: number | null
+  dropoff_lat?: number | null
+  dropoff_lng?: number | null
+  booking_date: string
+}
+
+export interface PublicBookingsViewDTO {
+  trip: {
+    id: number
+    origin: string
+    destination: string
+    departure_date: string
+    available_seats: number
+    total_seats: number
+  }
+  total_bookings: number
+  total_seats_booked: number
+  bookings: PublicBookingDTO[]
+}

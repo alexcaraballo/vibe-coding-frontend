@@ -1,13 +1,14 @@
 import { ref } from 'vue'
 import type { Ref } from 'vue'
 import MapsContainer from '../../infrastructure/di/container'
-import type { Coordinates, Route, RouteRequest, GeocodeRequest, RouteWithStops } from '../../domain/models/Route'
+import type { Coordinates, Route, RouteRequest, GeocodeRequest, RouteWithStops, PublicBookingsView } from '../../domain/models/Route'
 
 export function useMaps() {
   const mapsRepository = MapsContainer.getInstance().getMapsRepository()
 
   const currentRoute: Ref<Route | null> = ref(null)
   const routeWithStops: Ref<RouteWithStops | null> = ref(null)
+  const publicBookings: Ref<PublicBookingsView | null> = ref(null)
   const loading: Ref<boolean> = ref(false)
   const error: Ref<string | null> = ref(null)
 
@@ -69,14 +70,31 @@ export function useMaps() {
     }
   }
 
+  const getPublicBookings = async (tripId: number): Promise<PublicBookingsView | null> => {
+    loading.value = true
+    error.value = null
+    try {
+      const bookings = await mapsRepository.getPublicBookings(tripId)
+      publicBookings.value = bookings
+      return bookings
+    } catch (err: any) {
+      error.value = err.response?.data?.detail || 'Error al obtener visualización de reservas'
+      return null
+    } finally {
+      loading.value = false
+    }
+  }
+
   return {
     currentRoute,
     routeWithStops,
+    publicBookings,
     loading,
     error,
     geocodeAddress,
     calculateRoute,
     getTripRoute,
-    getTripRouteWithStops
+    getTripRouteWithStops,
+    getPublicBookings
   }
 }

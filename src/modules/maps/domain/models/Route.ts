@@ -45,3 +45,29 @@ export interface RouteWithStops {
   totalDistanceKm: number | null
   waypoints: Waypoint[]
 }
+
+export interface PublicBooking {
+  bookingId: number
+  seatsBooked: number
+  pickupLocation?: string | null
+  dropoffLocation?: string | null
+  pickupLat?: number | null
+  pickupLng?: number | null
+  dropoffLat?: number | null
+  dropoffLng?: number | null
+  bookingDate: Date
+}
+
+export interface PublicBookingsView {
+  trip: {
+    id: number
+    origin: string
+    destination: string
+    departureDate: Date
+    availableSeats: number
+    totalSeats: number
+  }
+  totalBookings: number
+  totalSeatsBooked: number
+  bookings: PublicBooking[]
+}

@@ -1,7 +1,7 @@
 import axios from '@/shared/utils/axios'
 import type { IMapsRepository } from '../../domain/repositories/IMapsRepository'
-import type { Coordinates, Route, RouteRequest, GeocodeRequest, RouteWithStops } from '../../domain/models/Route'
-import type { CoordinatesDTO, RouteResponseDTO, GeocodeRequestDTO, RouteRequestDTO, RouteWithStopsResponseDTO } from '../../presentation/types/MapsDTO'
+import type { Coordinates, Route, RouteRequest, GeocodeRequest, RouteWithStops, PublicBookingsView } from '../../domain/models/Route'
+import type { CoordinatesDTO, RouteResponseDTO, GeocodeRequestDTO, RouteRequestDTO, RouteWithStopsResponseDTO, PublicBookingsViewDTO } from '../../presentation/types/MapsDTO'
 import { MapsMapper } from '../mappers/MapsMapper'
 
 export class ApiMapsService implements IMapsRepository {
@@ -37,5 +37,10 @@ export class ApiMapsService implements IMapsRepository {
   async getTripRouteWithStops(tripId: number): Promise<RouteWithStops> {
     const response = await axios.get<RouteWithStopsResponseDTO>(`${this.tripsPath}/${tripId}/route-with-stops`)
     return MapsMapper.routeWithStopsToDomain(response.data)
+  }
+
+  async getPublicBookings(tripId: number): Promise<PublicBookingsView> {
+    const response = await axios.get<PublicBookingsViewDTO>(`${this.tripsPath}/${tripId}/bookings/public`)
+    return MapsMapper.publicBookingsViewToDomain(response.data)
   }
 }
